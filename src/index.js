@@ -15,7 +15,9 @@ const formComment = document.getElementById("new-comment")
 const formTwo = document.getElementById("edit-ramen")
 const editRating = document.querySelector("#edit-ramen #new-rating")
 const editComment = document.querySelector("#edit-ramen #new-comment")
+const formDelete = document.getElementById("delete-ramen")
 
+//GET request from JSON file and populating Menu and page load feature display
 fetch('http://localhost:3000/ramens')
 .then(response => response.json())
 .then(data => {
@@ -24,7 +26,7 @@ fetch('http://localhost:3000/ramens')
    })
    updatedFeaturedRamen(data[0])
 })
-/*Adding Ramen to top Div*/
+//Adding NEW Local Ramen to top Div
 function addRamen(ramen) {
     const menuItem = document.createElement("img")
     menuItem.src = ramen.image
@@ -37,7 +39,7 @@ function addRamen(ramen) {
         detailComment.textContent = ramen.comment
     })
 }
-//New Ramen Form Event Listener
+//New Ramen Form Event Listener, create a new Ramen
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     const addedRamen = {};
@@ -49,7 +51,7 @@ form.addEventListener("submit", (e) => {
     addRamen(addedRamen);
 })
 
-//Loading the first Ramen on page load
+//Loading the first Ramen from JSON on page load
 function updatedFeaturedRamen(ramen) {
     detailImage.src = ramen.image
         detailName.textContent = ramen.name
@@ -58,9 +60,14 @@ function updatedFeaturedRamen(ramen) {
         detailComment.textContent = ramen.comment
 }
 
-//Updating Rating and Comment
+//Updating Rating and Comment in added HTMl Form
 formTwo.addEventListener("submit", (e) => {
     e.preventDefault();
     detailRating.innerHTML = editRating.value
     detailComment.textContent = editComment.value
+})
+
+//Attempted Delete button, not finished
+formDelete.addEventListener("submit", (e) => {
+    e.preventDefault();
 })
