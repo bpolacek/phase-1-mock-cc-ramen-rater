@@ -17,8 +17,9 @@ fetch('http://localhost:3000/ramens')
 .then(response => response.json())
 .then(data => {
    data.forEach(ramen => {
-    addRamen(ramen);
+    addRamen(ramen)
    })
+   updatedFeaturedRamen(data[0])
 })
 
 function addRamen(ramen) {
@@ -45,3 +46,12 @@ form.addEventListener("submit", (e) => {
     console.log(addedRamen)
     addRamen(addedRamen);
 })
+
+
+function updatedFeaturedRamen(ramen) {
+    detailImage.src = ramen.image
+        detailName.textContent = ramen.name
+        detailRestaurant.textContent = ramen.restaurant
+        detailRating.innerHTML = ramen.rating
+        detailComment.textContent = ramen.comment
+}
