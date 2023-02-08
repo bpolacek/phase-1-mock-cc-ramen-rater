@@ -12,6 +12,9 @@ const formRestaurant = document.getElementById("new-restaurant")
 const formImage = document.getElementById("new-image")
 const formRating = document.getElementById("new-rating")
 const formComment = document.getElementById("new-comment")
+const formTwo = document.getElementById("edit-ramen")
+const editRating = document.querySelector("#edit-ramen #new-rating")
+const editComment = document.querySelector("#edit-ramen #new-comment")
 
 fetch('http://localhost:3000/ramens')
 .then(response => response.json())
@@ -21,7 +24,7 @@ fetch('http://localhost:3000/ramens')
    })
    updatedFeaturedRamen(data[0])
 })
-
+/*Adding Ramen to top Div*/
 function addRamen(ramen) {
     const menuItem = document.createElement("img")
     menuItem.src = ramen.image
@@ -34,7 +37,7 @@ function addRamen(ramen) {
         detailComment.textContent = ramen.comment
     })
 }
-
+//New Ramen Form Event Listener
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     const addedRamen = {};
@@ -43,11 +46,10 @@ form.addEventListener("submit", (e) => {
     addedRamen.image = formImage.value
     addedRamen.rating = formRating.value
     addedRamen.comment = formComment.value  
-    console.log(addedRamen)
     addRamen(addedRamen);
 })
 
-
+//Loading the first Ramen on page load
 function updatedFeaturedRamen(ramen) {
     detailImage.src = ramen.image
         detailName.textContent = ramen.name
@@ -55,3 +57,10 @@ function updatedFeaturedRamen(ramen) {
         detailRating.innerHTML = ramen.rating
         detailComment.textContent = ramen.comment
 }
+
+//Updating Rating and Comment
+formTwo.addEventListener("submit", (e) => {
+    e.preventDefault();
+    detailRating.innerHTML = editRating.value
+    detailComment.textContent = editComment.value
+})
